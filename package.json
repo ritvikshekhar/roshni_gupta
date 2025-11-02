@@ -2,7 +2,7 @@
 {
   "name": "graph-plotter",
   "version": "1.0.0",
-  "homepage": "https://roshni_gupta.github.io/graph-plotter",
+  "homepage": "https://ritvikshekhar.github.io/graph-plotter",
   "private": true,
   "dependencies": {
     "react": "^18.2.0",
