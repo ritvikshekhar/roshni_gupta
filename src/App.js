@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import { LineChart, Line, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, ReferenceLine } from 'recharts';
 import { AlertCircle, ZoomIn, ZoomOut, Maximize2 } from 'lucide-react';
 
@@ -27,6 +27,7 @@ export default function App() {
         .replace(/pi/g, 'Math.PI')
         .replace(/e(?![a-z])/g, 'Math.E');
       
+      // eslint-disable-next-line no-new-func
       const f = new Function('x', `return ${expr}`);
       return f(x);
     } catch (e) {
@@ -34,7 +35,7 @@ export default function App() {
     }
   };
 
-  const plotFunction = () => {
+  const plotFunction = useCallback(() => {
     try {
       setError('');
       const points = [];
@@ -57,11 +58,11 @@ export default function App() {
       setError(e.message);
       setData([]);
     }
-  };
+  }, [func, xMin, xMax]);
 
   useEffect(() => {
     plotFunction();
-  }, [func, xMin, xMax]);
+  }, [plotFunction]);
 
   const zoomIn = () => {
     const range = xMax - xMin;
